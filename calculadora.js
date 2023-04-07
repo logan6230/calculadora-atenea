@@ -72,16 +72,11 @@ function procesarEvento(boton) {
 
     if (operacion.length === 0 && boton.innerHTML === "0") { return mipantalla.value = "0"; }
 
-    if (operacion.length === 0 && (boton.innerHTML > "0" || boton.innerHTML < "0")) {
-        mipantalla.value = "";
-    }
+    if (operacion.length === 0 && (boton.innerHTML > "0" || boton.innerHTML < "0")) { mipantalla.value = ""; }
 
-    if (operacion.length === 0 && !numero.test(boton.innerHTML) && boton.innerHTML != "C") {
-        controlarOperadores(boton);
-        return
-    }
+    if (operacion.length === 0 && !numero.test(boton.innerHTML) && boton.innerHTML != "C") { return controlarOperadores(boton); }
 
-    if (boton.innerHTML === "C") { borrarPantalla(); return }
+    if (boton.innerHTML === "C") { return borrarPantalla(); }
 
     if (boton.innerHTML != "=" && boton.innerHTML != "C") {
 
@@ -98,9 +93,7 @@ function procesarEvento(boton) {
         }
 
         if (operacion.length > 0 && !numero.test(boton.innerHTML) && !numero.test(operacion[operacion.length - 1])) {
-            console.log('hola -> ' + valor);
-            mipantalla.value = valor;
-            return
+            return mipantalla.value = valor;
         }
         mipantalla.value += valor;
         operacion.push(boton.innerHTML);
@@ -111,7 +104,6 @@ function procesarEvento(boton) {
             mipantalla.value = resultado
             lastEquals = true;
         } catch (error) {
-            console.log('Este es el error-> ', error);
             mipantalla.value = "0"
         }
     }
